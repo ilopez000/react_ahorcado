@@ -41,6 +41,12 @@ function Hangman() {
     }
   };
 
+  const resetGame = () => {
+    setSelectedWord(randomWord());
+    setGuessedLetters([]);
+    setAttempts(0);
+  };
+
   // Comprueba si el jugador ha adivinado todas las letras de la palabra
   const hasWon = selectedWord.split('').every(letter => guessedLetters.includes(letter));
 
@@ -55,12 +61,14 @@ function Hangman() {
         <div>
           <h1>¡Enhorabuena, has ganado!</h1>
           <p>La palabra era: {selectedWord}</p>
+          <button onClick={resetGame}>Jugar de nuevo</button>
         </div>
       ) : hasLost ? (
         // Si el jugador ha perdido, muestra un mensaje de derrota
         <div>
           <h1>Game Over</h1>
           <p>La palabra era: {selectedWord}</p>
+          <button onClick={resetGame}>Jugar de nuevo</button>
         </div>
       ) : (
         // Si el juego está en curso, muestra los componentes Word, Alphabet y el número de intentos fallidos
@@ -76,3 +84,4 @@ function Hangman() {
 
 // Exportación del componente Hangman para su uso en otros archivos
 export default Hangman;
+
